@@ -116,6 +116,15 @@ pause''';
     );
   }
 
+  void _version() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const versionScreen(),
+      ),
+    );
+  }
+
   void _toggleConnection() async {
     if (_isConnected) {
       _disconnect();
@@ -263,6 +272,23 @@ pause''';
                 icon: const Icon(Icons.help_outline, color: Color(0xFFFF0000), size: 15),
                 label: const Text(
                   "comment se connecter ?",
+                  style: TextStyle(color: Color(0xFFFF0000), fontSize: 12),
+                ),
+              ),
+            ),
+
+            Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton.icon(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const VersionScreen()),
+                  );
+                },
+                icon: const Icon(Icons.help_outline, color: Color(0xFFFF0000), size: 15),
+                label: const Text(
+                  "Mises a jours",
                   style: TextStyle(color: Color(0xFFFF0000), fontSize: 12),
                 ),
               ),
@@ -525,7 +551,7 @@ class ConnectionHelpScreen extends StatelessWidget {
               Tab(text: "Windows"),
               Tab(text: "MacOS"),
               Tab(text: "Android"),
-               Tab(text: "Contact @"),
+              Tab(text: "Contact @"),
             ],
           ),
         ),
@@ -534,7 +560,7 @@ class ConnectionHelpScreen extends StatelessWidget {
             WindowsHelpView(),
             MacHelpView(),
             AndroidHelpView(),
-            contactView(),
+            ContactView(),
           ],
         ),
       ),
@@ -613,7 +639,6 @@ class WindowsHelpView extends StatelessWidget {
   }
 }
 
-
 class MacHelpView extends StatelessWidget {
   const MacHelpView({super.key});
 
@@ -668,8 +693,8 @@ class AndroidHelpView extends StatelessWidget {
   }
 }
 
-class contactView extends StatelessWidget {
-  const contactView({super.key});
+class ContactView extends StatelessWidget {
+  const ContactView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -689,3 +714,60 @@ class contactView extends StatelessWidget {
   }
 }
 
+class VersionScreen extends StatelessWidget {
+  const VersionScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 1,
+      child: Scaffold(
+        backgroundColor: const Color(0xFF000000),
+        appBar: AppBar(
+          title: const Text("historique des versions", style: TextStyle(fontSize: 15, fontFamily: "monospace")),
+          backgroundColor: const Color(0xFF000000),
+          elevation: 0,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back, color: Color(0xFFFF0000)),
+            onPressed: () => Navigator.pop(context),
+          ),
+          bottom: const TabBar(
+            indicatorColor: Color(0xFFFF0000),
+            labelColor: Color(0xFFFF0000),
+            unselectedLabelColor: Colors.white30,
+            indicatorWeight: 2,
+            tabs: [
+              Tab(text: "Versions"),
+            ],
+          ),
+        ),
+        body: const TabBarView(
+          children: [
+            VersionView(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class VersionView extends StatelessWidget {
+  const VersionView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      padding: const EdgeInsets.all(16),
+      children: const [
+        HelpStepToggle(
+          title: "- 1.0.0",
+          content: "- Modification du bouton de connexion.\n- Ajout édition pour le script server.bat .",
+        ),
+        HelpStepToggle(
+          title: "1.0.1 (a venir)",
+          content: "- Langue actuellement en français, de nouvelles langues seront ajouter a l avenir.",
+        ),
+      ],
+    );
+  }
+}
