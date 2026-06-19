@@ -290,7 +290,7 @@ pause''';
                               Row(
                                 children: [
                                   const Text(
-                                    "mises à jour",
+                                    "M.A.J. & News",
                                     style: TextStyle(
                                       color: Color(0xFFFF0000),
                                       fontSize: 14,
@@ -341,7 +341,7 @@ pause''';
                                         iconColor: Color(0xFFFF0000),
                                         collapsedIconColor: Colors.white38,
                                         title: Text(
-                                          "Version 1.0.1 (à venir)",
+                                          "Version 1.0.1 / News",
                                           style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold, fontFamily: "monospace"),
                                         ),
                                         children: [
@@ -350,7 +350,7 @@ pause''';
                                             child: Align(
                                               alignment: Alignment.centerLeft,
                                               child: Text(
-                                                "- Langue actuellement en français, de nouvelles langues seront ajoutées à l'avenir.",
+                                                "- Nouvelles langues bientôt disponibles: (anglais, allemand, portugais).",
                                                 style: TextStyle(color: Colors.white70, fontSize: 12, height: 1.4, fontFamily: "monospace"),
                                               ),
                                             ),
