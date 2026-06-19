@@ -368,7 +368,7 @@ pause''';
                     },
                   );
                 },
-                icon: const Icon(Icons.help_outline, color: Color(0xFFFF0000), size: 16),
+                icon: const Icon(Icons.update, color: Color(0xFFFF0000), size: 16),
                 label: const Text(
                   "Mises a jours",
                   style: TextStyle(color: Color(0xFFFF0000), fontSize: 13),
