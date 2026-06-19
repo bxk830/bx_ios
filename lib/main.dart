@@ -269,30 +269,14 @@ pause''';
               alignment: Alignment.centerLeft,
               child: TextButton.icon(
                 onPressed: _navigateToHelp,
-                icon: const Icon(Icons.help_outline, color: Color(0xFFFF0000), size: 15),
+                icon: const Icon(Icons.help_outline, color: Color(0xFFFF0000), size: 16),
                 label: const Text(
-                  "comment se connecter ?",
-                  style: TextStyle(color: Color(0xFFFF0000), fontSize: 12),
+                  "Comment se connecter ?",
+                  style: TextStyle(color: Color(0xFFFF0000), fontSize: 13),
                 ),
               ),
             ),
 
-            Align(
-              alignment: Alignment.centerLeft,
-              child: TextButton.icon(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const VersionScreen()),
-                  );
-                },
-                icon: const Icon(Icons.help_outline, color: Color(0xFFFF0000), size: 15),
-                label: const Text(
-                  "Mises a jours",
-                  style: TextStyle(color: Color(0xFFFF0000), fontSize: 12),
-                ),
-              ),
-            ),
             const SizedBox(height: 25),
 
             GestureDetector(
@@ -364,7 +348,8 @@ pause''';
                 Expanded(
                   child: TextField(
                     controller: _commandController,
-                    decoration: _customInputStyle("commandes a distance"),
+                    style: const TextStyle(fontSize: 14, color: Colors.white),
+                    decoration: _customInputStyle("commandes a distance (ex: ls, mkdir, ifconfig)"),
                     onSubmitted: (_) => _handleCommandExecution(),
                   ),
                 ),
@@ -467,7 +452,7 @@ class _BatScriptScreenState extends State<BatScriptScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFF000000),
       appBar: AppBar(
-        title: const Text("configuration server .bat", style: TextStyle(fontSize: 14, fontFamily: "monospace")),
+        title: const Text("Config de server .bat", style: TextStyle(fontSize: 16, fontFamily: "monospace")),
         backgroundColor: const Color(0xFF000000),
         elevation: 0,
         leading: IconButton(
@@ -535,7 +520,7 @@ class ConnectionHelpScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: const Color(0xFF000000),
         appBar: AppBar(
-          title: const Text("guide de connexion", style: TextStyle(fontSize: 15, fontFamily: "monospace")),
+          title: const Text("Guide de connexion et aide", style: TextStyle(fontSize: 16, fontFamily: "monospace")),
           backgroundColor: const Color(0xFF000000),
           elevation: 0,
           leading: IconButton(
@@ -548,10 +533,10 @@ class ConnectionHelpScreen extends StatelessWidget {
             unselectedLabelColor: Colors.white30,
             indicatorWeight: 2,
             tabs: [
-              Tab(text: "Windows"),
-              Tab(text: "MacOS"),
-              Tab(text: "Android"),
-              Tab(text: "Contact @"),
+              Tab(text: "windows"),
+              Tab(text: "macos"),
+              Tab(text: "android"),
+              Tab(text: "contact @"),
             ],
           ),
         ),
@@ -681,12 +666,12 @@ class AndroidHelpView extends StatelessWidget {
           content: "Pour que votre appareil Android puisse recevoir des commandes en local, téléchargez un émulateur de console réseau (ex: Termux) depuis une bibliothèque sécurisée.",
         ),
         HelpStepToggle(
-          title: "Étape 2 : initialiser l écoute locale",
+          title: "Étape 2 : initialiser l ecoute locale",
           content: "Ouvrez votre application de terminal Android (Termux) puis saisissez l'instruction suivante pour ouvrir le canal réseau interne :\nnc -l -p 55555",
         ),
         HelpStepToggle(
           title: "Étape 3 : verifier l ip reseau de l appareil",
-          content: "Allez dans Paramètres Android -> À propos du téléphone -> Statut (ou Infos d'état) -> Adresse IP.\n\nTant que l'appareil reste connecté au même réseau Wi-Fi local que votre iPhone, la liaison s'effectuera directement via cette IP.",
+          content: "Allez dans Paramètres Android -> À propos du téléphone -> Statut (ou Infos d'état) -> Adresse IP.\n\nTant que l'appareil reste connecté au même réseau Wi-Fi local que cet appareil Android, la liaison s'effectuera directement via cette IP.",
         ),
       ],
     );
@@ -702,72 +687,15 @@ class ContactView extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       children: const [
         HelpStepToggle(
-          title: "Vous rencontrez un bug ?",
-          content: "- Rendez vous dans la partie commentaires du site ou vous \navez téléchargez l appli.",
-        ),
-        HelpStepToggle(
           title: "Vous avez une idée de mise a jour ?",
-          content: "- Rendez vous dans la partie commentaires du site ou vous \navez téléchargez l appli.",
+          content: "- Rendez vous dans la partie commentaires sur le site ou vous avez télécharger l appli.",
+        ),
+        HelpStepToggle(
+          title: "Vous rencontrez un bug ?",
+          content: "- Rendez vous dans la partie commentaires sur le site ou vous avez télécharger l appli.",
         ),
       ],
     );
   }
 }
 
-class VersionScreen extends StatelessWidget {
-  const VersionScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 1,
-      child: Scaffold(
-        backgroundColor: const Color(0xFF000000),
-        appBar: AppBar(
-          title: const Text("historique des versions", style: TextStyle(fontSize: 15, fontFamily: "monospace")),
-          backgroundColor: const Color(0xFF000000),
-          elevation: 0,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Color(0xFFFF0000)),
-            onPressed: () => Navigator.pop(context),
-          ),
-          bottom: const TabBar(
-            indicatorColor: Color(0xFFFF0000),
-            labelColor: Color(0xFFFF0000),
-            unselectedLabelColor: Colors.white30,
-            indicatorWeight: 2,
-            tabs: [
-              Tab(text: "Versions"),
-            ],
-          ),
-        ),
-        body: const TabBarView(
-          children: [
-            VersionView(),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class VersionView extends StatelessWidget {
-  const VersionView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.all(16),
-      children: const [
-        HelpStepToggle(
-          title: "- 1.0.0",
-          content: "- Modification du bouton de connexion.\n- Ajout édition pour le script server.bat .",
-        ),
-        HelpStepToggle(
-          title: "1.0.1 (a venir)",
-          content: "- Langue actuellement en français, de nouvelles langues seront ajouter a l avenir.",
-        ),
-      ],
-    );
-  }
-}
