@@ -225,6 +225,7 @@ pause''';
         actions: [
           TextButton(
             onPressed: _navigateToBatScript,
+            icon: const Icon(Icons.file_copy, color: Color(0xFFFF0000), size: 16),
             child: const Text("copier le .bat", style: TextStyle(color: Color(0xFFFF0000), fontSize: 13)),
           )
         ],
