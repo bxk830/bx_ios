@@ -435,14 +435,26 @@ pause''';
               ),
             ),
             const SizedBox(height: 12),
-            Text(
-              _isConnected ? "status : connecté" : "statut : deconnecté",
-              style: TextStyle(
-                fontSize: 15,
-                color: _isConnected ? const Color(0xFFFF0000) : Colors.white24,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.circle,
+                  size: 10,
+                  color: _isConnected ? const Color(0xFF00FF00) : const Color(0xFFFF0000),
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  _isConnected ? "status : connecté" : "statut : deconnecté",
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: _isConnected ? const Color(0xFF00FF00) : Colors.white24,
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 35),
+
 
             Row(
               children: [
