@@ -1,0 +1,34 @@
+workflows:
+  ios-build:
+    name: iOS App Build
+    instance_type: mac_mini_m1
+    environment:
+      flutter: stable
+      xcode: latest
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: '*'
+          include: true
+    scripts:
+      - name: Generer l environnement iOS
+        script: |
+          flutter create . --platforms=ios
+      - name: Recuperer les dependances Pub
+        script: |
+          flutter pub get
+      - name: Generer l icone de l application
+        script: |
+          dart run flutter_launcher_icons
+      - name: Compiler pour iOS
+        script: |
+          flutter build ios --no-codesign
+      - name: Packager en IPA non signe
+        script: |
+          cd build/ios/iphoneos
+          mkdir Payload
+          cp -r Runner.app Payload/
+          zip -r remote_control.ipa Payload
+    artifacts:
+      - build/ios/iphoneos/*.ipa
