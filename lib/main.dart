@@ -505,7 +505,7 @@ class ConnectionHelpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         backgroundColor: const Color(0xFF000000),
         appBar: AppBar(
@@ -522,9 +522,10 @@ class ConnectionHelpScreen extends StatelessWidget {
             unselectedLabelColor: Colors.white30,
             indicatorWeight: 2,
             tabs: [
-              Tab(text: "windows"),
-              Tab(text: "macos"),
-              Tab(text: "android"),
+              Tab(text: "Windows"),
+              Tab(text: "MacOS"),
+              Tab(text: "Android"),
+               Tab(text: "Contact @"),
             ],
           ),
         ),
@@ -533,6 +534,7 @@ class ConnectionHelpScreen extends StatelessWidget {
             WindowsHelpView(),
             MacHelpView(),
             AndroidHelpView(),
+            contactView(),
           ],
         ),
       ),
@@ -591,19 +593,19 @@ class WindowsHelpView extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       children: const [
         HelpStepToggle(
-          title: "etape 1 : creer un dossier securise",
+          title: "Étape 1 : creer un dossier securisé",
           content: "Pour éviter que Windows Defender ou votre pare-feu bloque l'application, évitez le dossier /Downloads.\n\nCréez un dossier neuf à la racine de votre système, par exemple : C:\\BXRemote.",
         ),
         HelpStepToggle(
-          title: "etape 2 : autorisations du dossier",
+          title: "Étape 2 : autorisations du dossier",
           content: "Faites un clic droit sur votre dossier créé -> Propriétés -> Sécurité.\n\nVérifiez que votre session utilisateur possède le contrôle total sur ce dossier afin d'exécuter des fichiers sans contraintes.",
         ),
         HelpStepToggle(
-          title: "etape 3 : deploiement du script .bat",
+          title: "Étape 3 : deploiement du script .bat",
           content: "1. Copiez le script .bat depuis l'application.\n2. Dans votre dossier sécurisé, créez un document texte nommé 'serveur.bat'.\n3. Collez le code dedans et sauvegardez.\n4. Double-cliquez pour exécuter l'écouteur sur le port 55555.",
         ),
         HelpStepToggle(
-          title: "etape 4 : recuperer l adresse ip locale",
+          title: "Étape 4 : recuperer l adresse ip locale",
           content: "Ouvrez l'invite de commande (cmd) sur votre PC, tapez 'ipconfig' et repérez la ligne 'Adresse IPv4' (ex: 192.168.1.35).\n\nEntrez cette IP et le port 55555 dans l'application pour initier la liaison.",
         ),
       ],
@@ -621,19 +623,19 @@ class MacHelpView extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       children: const [
         HelpStepToggle(
-          title: "etape 1 : configurer un repertoire isole",
+          title: "Étape 1 : configurer un repertoire isole",
           content: "macOS restreint l'activité réseau brute dans le dossier Téléchargements standard.\n\nOuvrez votre Finder et créez un dossier isolé dans votre dossier utilisateur (ex: /Utilisateurs/votre-nom/BXConsole).",
         ),
         HelpStepToggle(
-          title: "etape 2 : demarrer l ecoute reseau",
+          title: "Étape 2 : demarrer l ecoute reseau",
           content: "Ouvrez l'application Terminal sur votre Mac et déplacez-vous dans votre dossier sécurisé.\n\nTapez la commande de socket suivante pour ouvrir le port d'écoute :\nnc -l 55555",
         ),
         HelpStepToggle(
-          title: "etape 3 : autoriser les flux entrants",
+          title: "Étape 3 : autoriser les flux entrants",
           content: "Si le système d'exploitation macOS affiche une alerte de sécurité, acceptez explicitement la demande d'autorisation réseau pour le Terminal.",
         ),
         HelpStepToggle(
-          title: "etape 4 : renseigner l ip locale",
+          title: "Étape 4 : renseigner l ip locale",
           content: "Allez dans Réglages Système -> Réseau -> Wi-Fi ou Ethernet -> Détails.\n\nNotez l'adresse IP locale affichée, renseignez-la dans BX Remote, puis validez.",
         ),
       ],
@@ -650,18 +652,40 @@ class AndroidHelpView extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       children: const [
         HelpStepToggle(
-          title: "etape 1 : installer un emulateur terminal",
+          title: "Étape 1 : installer un emulateur terminal",
           content: "Pour que votre appareil Android puisse recevoir des commandes en local, téléchargez un émulateur de console réseau (ex: Termux) depuis une bibliothèque sécurisée.",
         ),
         HelpStepToggle(
-          title: "etape 2 : initialiser l ecoute locale",
+          title: "Étape 2 : initialiser l écoute locale",
           content: "Ouvrez votre application de terminal Android (Termux) puis saisissez l'instruction suivante pour ouvrir le canal réseau interne :\nnc -l -p 55555",
         ),
         HelpStepToggle(
-          title: "etape 3 : verifier l ip reseau de l appareil",
+          title: "Étape 3 : verifier l ip reseau de l appareil",
           content: "Allez dans Paramètres Android -> À propos du téléphone -> Statut (ou Infos d'état) -> Adresse IP.\n\nTant que l'appareil reste connecté au même réseau Wi-Fi local que votre iPhone, la liaison s'effectuera directement via cette IP.",
         ),
       ],
     );
   }
 }
+
+class contactView extends StatelessWidget {
+  const contactView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      padding: const EdgeInsets.all(16),
+      children: const [
+        HelpStepToggle(
+          title: "Vous rencontrez un bug ?",
+          content: "- Rendez vous dans la partie commentaires du site ou vous \navez téléchargez l appli.",
+        ),
+        HelpStepToggle(
+          title: "Vous avez une idée de mise a jour ?",
+          content: "- Rendez vous dans la partie commentaires du site ou vous \navez téléchargez l appli.",
+        ),
+      ],
+    );
+  }
+}
+
