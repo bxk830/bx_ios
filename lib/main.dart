@@ -256,18 +256,129 @@ pause''';
             ),
             
        
-            Align(
+                      Align(
               alignment: Alignment.centerLeft,
               child: TextButton.icon(
                 onPressed: _navigateToHelp,
-                icon: const Icon(Icons.help_outline, color: Color(0xFFFF0000), size: 15),
+                icon: const Icon(Icons.help_outline, color: Color(0xFFFF0000), size: 16),
                 label: const Text(
-                  "comment se connecter ?",
-                  style: TextStyle(color: Color(0xFFFF0000), fontSize: 12),
+                  "Comment se connecter ?",
+                  style: TextStyle(color: Color(0xFFFF0000), fontSize: 13),
                 ),
               ),
             ),
+
+            Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton.icon(
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return Dialog(
+                        backgroundColor: const Color(0xFF050505),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4),
+                          side: const BorderSide(color: Colors.white10),
+                        ),
+                        child: Container(
+                          padding: const EdgeInsets.all(16),
+                          width: double.infinity,
+                          height: 350,
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  const Text(
+                                    "mises à jour",
+                                    style: TextStyle(
+                                      color: Color(0xFFFF0000),
+                                      fontSize: 14,
+                                      fontFamily: "monospace",
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const Spacer(),
+                                  GestureDetector(
+                                    onTap: () => Navigator.pop(context),
+                                    child: const Icon(Icons.close, color: Colors.white38, size: 18),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 10),
+                              const Divider(color: Colors.white10, height: 1),
+                              const SizedBox(height: 10),
+                              Expanded(
+                                child: ListView(
+                                  children: [
+                                    Theme(
+                                      data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+                                      child: const ExpansionTile(
+                                        iconColor: Color(0xFFFF0000),
+                                        collapsedIconColor: Colors.white38,
+                                        title: Text(
+                                          "Version 1.0.0",
+                                          style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold, fontFamily: "monospace"),
+                                        ),
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.all(8.0),
+                                            child: Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: Text(
+                                                "- Modification du bouton de connexion.\n- Ajout édition pour le script server.bat .",
+                                                style: TextStyle(color: Colors.white70, fontSize: 12, height: 1.4, fontFamily: "monospace"),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    const Divider(color: Colors.white10),
+                                    Theme(
+                                      data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+                                      child: const ExpansionTile(
+                                        iconColor: Color(0xFFFF0000),
+                                        collapsedIconColor: Colors.white38,
+                                        title: Text(
+                                          "Version 1.0.1 (à venir)",
+                                          style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold, fontFamily: "monospace"),
+                                        ),
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.all(8.0),
+                                            child: Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: Text(
+                                                "- Langue actuellement en français, de nouvelles langues seront ajoutées à l'avenir.",
+                                                style: TextStyle(color: Colors.white70, fontSize: 12, height: 1.4, fontFamily: "monospace"),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+                icon: const Icon(Icons.help_outline, color: Color(0xFFFF0000), size: 16),
+                label: const Text(
+                  "Mises a jours",
+                  style: TextStyle(color: Color(0xFFFF0000), fontSize: 13),
+                ),
+              ),
+            ),
+
+
             const SizedBox(height: 25),
+
 
             GestureDetector(
               onTapDown: (_) => _animationController.forward(),
@@ -338,7 +449,8 @@ pause''';
                 Expanded(
                   child: TextField(
                     controller: _commandController,
-                    decoration: _customInputStyle("commandes a distance"),
+                    style: const TextStyle(fontSize: 14, color: Colors.white),
+                    decoration: _customInputStyle("commandes a distance (ex: ls, mkdir, ifconfig)"),
                     onSubmitted: (_) => _handleCommandExecution(),
                   ),
                 ),
@@ -441,7 +553,7 @@ class _BatScriptScreenState extends State<BatScriptScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFF000000),
       appBar: AppBar(
-        title: const Text("configuration server .bat", style: TextStyle(fontSize: 14, fontFamily: "monospace")),
+        title: const Text("Config de server .bat", style: TextStyle(fontSize: 16, fontFamily: "monospace")),
         backgroundColor: const Color(0xFF000000),
         elevation: 0,
         leading: IconButton(
@@ -505,11 +617,11 @@ class ConnectionHelpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         backgroundColor: const Color(0xFF000000),
         appBar: AppBar(
-          title: const Text("guide de connexion", style: TextStyle(fontSize: 15, fontFamily: "monospace")),
+          title: const Text("Guide de connexion et aide", style: TextStyle(fontSize: 16, fontFamily: "monospace")),
           backgroundColor: const Color(0xFF000000),
           elevation: 0,
           leading: IconButton(
@@ -525,6 +637,7 @@ class ConnectionHelpScreen extends StatelessWidget {
               Tab(text: "windows"),
               Tab(text: "macos"),
               Tab(text: "android"),
+              Tab(text: "contact @"),
             ],
           ),
         ),
@@ -533,6 +646,7 @@ class ConnectionHelpScreen extends StatelessWidget {
             WindowsHelpView(),
             MacHelpView(),
             AndroidHelpView(),
+            ContactView(),
           ],
         ),
       ),
@@ -591,26 +705,25 @@ class WindowsHelpView extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       children: const [
         HelpStepToggle(
-          title: "etape 1 : creer un dossier securise",
+          title: "Étape 1 : creer un dossier securisé",
           content: "Pour éviter que Windows Defender ou votre pare-feu bloque l'application, évitez le dossier /Downloads.\n\nCréez un dossier neuf à la racine de votre système, par exemple : C:\\BXRemote.",
         ),
         HelpStepToggle(
-          title: "etape 2 : autorisations du dossier",
+          title: "Étape 2 : autorisations du dossier",
           content: "Faites un clic droit sur votre dossier créé -> Propriétés -> Sécurité.\n\nVérifiez que votre session utilisateur possède le contrôle total sur ce dossier afin d'exécuter des fichiers sans contraintes.",
         ),
         HelpStepToggle(
-          title: "etape 3 : deploiement du script .bat",
+          title: "Étape 3 : deploiement du script .bat",
           content: "1. Copiez le script .bat depuis l'application.\n2. Dans votre dossier sécurisé, créez un document texte nommé 'serveur.bat'.\n3. Collez le code dedans et sauvegardez.\n4. Double-cliquez pour exécuter l'écouteur sur le port 55555.",
         ),
         HelpStepToggle(
-          title: "etape 4 : recuperer l adresse ip locale",
+          title: "Étape 4 : recuperer l adresse ip locale",
           content: "Ouvrez l'invite de commande (cmd) sur votre PC, tapez 'ipconfig' et repérez la ligne 'Adresse IPv4' (ex: 192.168.1.35).\n\nEntrez cette IP et le port 55555 dans l'application pour initier la liaison.",
         ),
       ],
     );
   }
 }
-
 
 class MacHelpView extends StatelessWidget {
   const MacHelpView({super.key});
@@ -621,19 +734,19 @@ class MacHelpView extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       children: const [
         HelpStepToggle(
-          title: "etape 1 : configurer un repertoire isole",
+          title: "Étape 1 : configurer un repertoire isole",
           content: "macOS restreint l'activité réseau brute dans le dossier Téléchargements standard.\n\nOuvrez votre Finder et créez un dossier isolé dans votre dossier utilisateur (ex: /Utilisateurs/votre-nom/BXConsole).",
         ),
         HelpStepToggle(
-          title: "etape 2 : demarrer l ecoute reseau",
+          title: "Étape 2 : demarrer l ecoute reseau",
           content: "Ouvrez l'application Terminal sur votre Mac et déplacez-vous dans votre dossier sécurisé.\n\nTapez la commande de socket suivante pour ouvrir le port d'écoute :\nnc -l 55555",
         ),
         HelpStepToggle(
-          title: "etape 3 : autoriser les flux entrants",
+          title: "Étape 3 : autoriser les flux entrants",
           content: "Si le système d'exploitation macOS affiche une alerte de sécurité, acceptez explicitement la demande d'autorisation réseau pour le Terminal.",
         ),
         HelpStepToggle(
-          title: "etape 4 : renseigner l ip locale",
+          title: "Étape 4 : renseigner l ip locale",
           content: "Allez dans Réglages Système -> Réseau -> Wi-Fi ou Ethernet -> Détails.\n\nNotez l'adresse IP locale affichée, renseignez-la dans BX Remote, puis validez.",
         ),
       ],
@@ -650,18 +763,40 @@ class AndroidHelpView extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       children: const [
         HelpStepToggle(
-          title: "etape 1 : installer un emulateur terminal",
+          title: "Étape 1 : installer un emulateur terminal",
           content: "Pour que votre appareil Android puisse recevoir des commandes en local, téléchargez un émulateur de console réseau (ex: Termux) depuis une bibliothèque sécurisée.",
         ),
         HelpStepToggle(
-          title: "etape 2 : initialiser l ecoute locale",
+          title: "Étape 2 : initialiser l ecoute locale",
           content: "Ouvrez votre application de terminal Android (Termux) puis saisissez l'instruction suivante pour ouvrir le canal réseau interne :\nnc -l -p 55555",
         ),
         HelpStepToggle(
-          title: "etape 3 : verifier l ip reseau de l appareil",
-          content: "Allez dans Paramètres Android -> À propos du téléphone -> Statut (ou Infos d'état) -> Adresse IP.\n\nTant que l'appareil reste connecté au même réseau Wi-Fi local que votre iPhone, la liaison s'effectuera directement via cette IP.",
+          title: "Étape 3 : verifier l ip reseau de l appareil",
+          content: "Allez dans Paramètres Android -> À propos du téléphone -> Statut (ou Infos d'état) -> Adresse IP.\n\nTant que l'appareil reste connecté au même réseau Wi-Fi local que cet appareil Android, la liaison s'effectuera directement via cette IP.",
         ),
       ],
     );
   }
 }
+
+class ContactView extends StatelessWidget {
+  const ContactView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      padding: const EdgeInsets.all(16),
+      children: const [
+        HelpStepToggle(
+          title: "Vous avez une idée de mise a jour ?",
+          content: "- Rendez vous dans la partie commentaires sur le site ou vous avez télécharger l appli.",
+        ),
+        HelpStepToggle(
+          title: "Vous rencontrez un bug ?",
+          content: "- Rendez vous dans la partie commentaires sur le site ou vous avez télécharger l appli.",
+        ),
+      ],
+    );
+  }
+}
+
